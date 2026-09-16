@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="mecanum_drive">
+        <xacro:property name="wheel_radius" value="0.05"/>
+        <xacro:property name="wheel_length" value="0.04"/>
+
+        <!-- Macro tạo bánh xe -->
+        <xacro:macro name="mecanum_wheel" params="prefix x_pos y_pos">
+            <link name="${prefix}_wheel">
+                <visual>
+                    <geometry>
+                        <cylinder radius="${wheel_radius}" length="${wheel_length}"/>
+                    </geometry>
+                    <material name="gray"><color rgba="0.5 0.5 0.5 1.0"/></material>
+                </visual>
+                <collision><geometry><cylinder radius="${wheel_radius}" length="${wheel_length}"/></geometry></collision>
+                <xacro:inertial_cylinder mass="0.5" length="${wheel_length}" radius="${wheel_radius}">
+                    <origin xyz="0 0 0" rpy="0 0 0"/>
+                </xacro:inertial_cylinder>
+            </link>
+            
+            <joint name="${prefix}_wheel_joint" type="continuous">
+                <parent link="base_link"/>
+                <child link="${prefix}_wheel"/>
+                <origin xyz="${x_pos} ${y_pos} -0.025" rpy="-${pi/2} 0 0"/>
+                <axis xyz="0 0 1"/>
+            </joint>
+        </xacro:macro>
+
+        <!-- Gọi macro để tạo 4 bánh -->
+        <xacro:mecanum_wheel prefix="front_left" x_pos="0.15" y_pos="0.17"/>
+        <xacro:mecanum_wheel prefix="front_right" x_pos="0.15" y_pos="-0.17"/>
+        <xacro:mecanum_wheel prefix="rear_left" x_pos="-0.15" y_pos="0.17"/>
+        <xacro:mecanum_wheel prefix="rear_right" x_pos="-0.15" y_pos="-0.17"/>
+    </xacro:macro>
+</robot>

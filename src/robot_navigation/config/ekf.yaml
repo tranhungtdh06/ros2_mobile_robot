@@ -1,0 +1,27 @@
+ekf_filter_node:
+  ros__parameters:
+    use_sim_time: true
+    frequency: 30.0
+    two_d_mode: true # Bắt buộc là true cho robot chạy trên mặt phẳng
+    publish_tf: true
+    
+    map_frame: map
+    odom_frame: odom
+    base_link_frame: base_footprint
+    world_frame: odom
+    
+    # Cấu hình dữ liệu đầu vào từ Bánh xe
+    odom0: /odom
+    odom0_config: [true,  true,  false,  # X, Y, Z
+                   false, false, false,  # Roll, Pitch, Yaw
+                   true,  true,  false,  # V_X, V_Y, V_Z
+                   false, false, true,   # V_Roll, V_Pitch, V_Yaw
+                   false, false, false]  # A_X, A_Y, A_Z
+    
+    # Cấu hình dữ liệu đầu vào từ IMU
+    imu0: /imu/data
+    imu0_config: [false, false, false,
+                  false, false, false,
+                  false, false, false,
+                  false, false, true,    # Chỉ lấy Vận tốc góc Yaw từ IMU
+                  true,  true,  false]   # Và Gia tốc X, Y

@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+  <world name="complex_world">
+    <!-- 4 Plugin cốt lõi của Gazebo Harmonic -->
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"></plugin>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"></plugin>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"></plugin>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+
+    <!-- Ánh sáng -->
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <!-- Kéo mô hình Sa hình (Playpen) từ Gazebo Fuel Cloud -->
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Playpen</uri>
+      <pose>0 0 0 0 0 0</pose>
+    </include>
+
+    <!-- Kéo thêm 3 cái nón giao thông (Construction Cone) làm vật cản -->
+    <include>
+      <name>cone_1</name>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction Cone</uri>
+      <pose>2.5 1.0 0 0 0 0</pose>
+    </include>
+    <include>
+      <name>cone_2</name>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction Cone</uri>
+      <pose>3.5 -2.0 0 0 0 0</pose>
+    </include>
+    <include>
+      <name>cone_3</name>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction Cone</uri>
+      <pose>-2.0 2.5 0 0 0 0</pose>
+    </include>
+
+  </world>
+</sdf>

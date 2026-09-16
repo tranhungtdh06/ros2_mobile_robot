@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<robot name="autonomous_bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <!-- Tham số quyết định loại robot truyền vào từ Launch file -->
+    <xacro:arg name="drive_type" default="mecanum" />
+
+    <!-- Include các thành phần chung -->
+    <xacro:include filename="core/common_macros.xacro"/>
+    <xacro:include filename="core/chassis.xacro"/>
+
+    <!-- Include các module (chưa thực thi) -->
+    <xacro:include filename="drive/mecanum_drive.xacro"/>
+    <xacro:include filename="drive/diff_drive.xacro"/>
+
+    <!-- LÔGIC CHUYỂN ĐỔI -->
+    <xacro:if value="${'$(arg drive_type)' == 'mecanum'}">
+        <xacro:mecanum_drive /> <!-- Thực thi tạo bánh Mecanum -->
+    </xacro:if>
+
+    <xacro:if value="${'$(arg drive_type)' == 'diff'}">
+        <xacro:diff_drive /> <!-- Thực thi tạo bánh Diff -->
+    </xacro:if>
+
+    <!-- Bạn có thể include Lidar, IMU ở dưới đây một cách độc lập (luôn luôn có) -->
+    <!-- <xacro:include filename="sensors/lidar.xacro"/> -->
+    <!-- INCLUDE CẢM BIẾN -->
+    <xacro:include filename="sensors/lidar.xacro"/>
+    <xacro:include filename="sensors/imu.xacro"/>
+
+    <!-- INCLUDE GAZEBO CONTROLLERS -->
+    <xacro:include filename="gazebo/drive_plugins.xacro"/>
+</robot>

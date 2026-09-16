@@ -1,0 +1,14 @@
+# ROS2 workspace directories
+build/
+install/
+log/
+
+# VSCode settings (Tùy chọn, nên bỏ qua nếu làm việc nhóm)
+.vscode/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# OS generated files
+.DS_Store

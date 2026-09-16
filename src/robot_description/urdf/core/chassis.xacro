@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <!-- BASE FOOTPRINT (Hình chiếu của robot xuống mặt đất) -->
+    <link name="base_footprint"/>
+
+    <joint name="base_footprint_joint" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/> <!-- Nâng gầm lên 5cm -->
+    </joint>
+
+    <!-- BASE LINK (Khung gầm chính) -->
+    <link name="base_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.4 0.3 0.1"/> <!-- Dài 40cm, rộng 30cm, cao 10cm -->
+            </geometry>
+            <material name="blue">
+                <color rgba="0.2 0.2 0.8 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.4 0.3 0.1"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_box mass="5.0" x="0.4" y="0.3" z="0.1">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_box>
+    </link>
+</robot>
