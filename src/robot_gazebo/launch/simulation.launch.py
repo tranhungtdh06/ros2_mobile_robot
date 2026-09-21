@@ -5,6 +5,7 @@ from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, Command
 from launch_ros.actions import Node
+from launch_ros.parameter_descriptions import ParameterValue
 
 def generate_launch_description():
     gazebo_pkg = get_package_share_directory('robot_gazebo')
@@ -22,7 +23,10 @@ def generate_launch_description():
     robot_state_publisher = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
-        parameters=[{'robot_description': robot_description_content, 'use_sim_time': True}]
+        parameters=[{
+            'robot_description': ParameterValue(robot_description_content, value_type=str), 
+            'use_sim_time': True
+        }]
     )
 
     # Chạy Gazebo Harmonic
@@ -61,6 +65,9 @@ def generate_launch_description():
             '/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan',
             '/imu/data@sensor_msgs/msg/Imu[gz.msgs.IMU',
             '/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V'
+            '/camera/image@sensor_msgs/msg/Image[gz.msgs.Image',
+            '/camera/depth_image@sensor_msgs/msg/Image[gz.msgs.Image',
+            '/camera/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked'
         ],
         output='screen'
     )

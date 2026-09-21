@@ -25,6 +25,7 @@
     <!-- INCLUDE CẢM BIẾN -->
     <xacro:include filename="sensors/lidar.xacro"/>
     <xacro:include filename="sensors/imu.xacro"/>
+    <xacro:include filename="sensors/camera.xacro"/>
 
     <!-- INCLUDE GAZEBO CONTROLLERS -->
     <xacro:include filename="gazebo/drive_plugins.xacro"/>
